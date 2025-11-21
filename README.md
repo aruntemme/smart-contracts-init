@@ -1,4 +1,6 @@
-# Day 2: Smart Contracts & Custom Tokens on Base Sepolia
+# Web3 Grind: Days 2 & 3
+
+## Day 2: Smart Contracts & Custom Tokens on Base Sepolia
 
 Transitioning from sending simple transactions to **programming the network**. We built a smart contract and, because we lacked testnet USDC, we minted our own currency (`peUSDC`) to power the ecosystem.
 
@@ -82,3 +84,45 @@ Transitioning from sending simple transactions to **programming the network**. W
 ![Transaction Proof](./image.png)
 
 **Status:** ✅ Verified & Funded (100 peUSDC balance visible on-chain).
+
+----
+
+## Day 3: The Robot (Automation)
+
+Transitioning from manual clicking to **automated high-frequency interaction**. We built a TypeScript bot that monitors the blockchain state and executes transactions automatically without human intervention.
+
+### What We Did
+
+1.  **Integrated Viem with Hardhat:** Brought the connectivity library from Day 1 into our Day 2 project context.
+2.  **Built `bot.ts`:** Created a script that runs an infinite polling loop.
+3.  **Implemented Logic:**
+      * **Read:** Constantly checks `allowances(agent)` on the Vault contract.
+      * **React:** If allowance \> 0, it triggers `claimUSDC()`.
+4.  **Live Fire Test:** Manually approved funds via BaseScan (as the Master) and watched the Bot (as the Agent) instantly detect and snatch the funds within seconds.
+
+### Key Learnings (Day 3)
+
+  * **The Polling Pattern:** Unlike Web2 webhooks, simple bots often rely on querying the blockchain state (`readContract`) at set intervals (e.g., every 5 seconds).
+  * **Human Readable ABIs:** We don't need the massive JSON ABI file; we can use `parseAbi(['function name(...)'])` for cleaner code.
+  * **The "Keeper" Concept:** We essentially built a primitive "Keeper Bot"—the foundation for liquidators, arbitrage bots, and automated market makers.
+
+## How to Run (Day 3 Bot)
+
+1.  **Install Viem & Dotenv:**
+
+    ```bash
+    npm install viem dotenv
+    ```
+
+2.  **Run the Bot:**
+
+    ```bash
+    npx ts-node bot.ts
+    ```
+
+    *The bot will now listen for changes on the Vault contract.*
+
+## Proof of Work
+
+**Bot Transaction (Auto-Claim):**
+`0x1f0536274f08420bd7111b009173dd23d01c885a03e38edd513ca33ee298b2b5`
