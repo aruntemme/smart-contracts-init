@@ -1,6 +1,4 @@
-# Web3 Grind: Days 2 & 3
-
-## Day 2: Smart Contracts & Custom Tokens on Base Sepolia
+## Day 2: Smart Contracts & Custom Tokens on Base Sepolia (Day 3 Continued)
 
 Transitioning from sending simple transactions to **programming the network**. We built a smart contract and, because we lacked testnet USDC, we minted our own currency (`peUSDC`) to power the ecosystem.
 
